@@ -69,12 +69,36 @@
 
 <Header />
 <div
-  class="container mx-auto flex flex-1 max-w-6xl justify-between items-center"
+  class="container mx-auto flex flex-1 max-w-5xl justify-between items-center gap-20"
 >
   <div class="w-3/5">
-    <h2 class="border-b border-secondary inline-block pb-[12px] uppercase">
-      Entscheidungsbaumdiagramme - aber es sind actually Diagramme.
+    <h2
+      class="border-b border-secondary inline-block pb-[10px] text-xl uppercase"
+    >
+      Entscheidungsbaumdiagramme - ???
     </h2>
+    <p class="text-base text-justify pt-[20px]">
+      Wer mit den vom BDEW veröffentlichten Entscheidungsbaum-”Diagrammen“
+      (EBDs) arbeitet weiß: Die tabellarische Form ist sperrig und mindestens
+      unübersichtlich. Unsere automatisch generierten EBDs von Hochfrequenz sind
+      hingegen echte Diagramme - lesbar und nutzungsfreundlich.
+    </p>
+    <p class="text-base text-justify pt-[20px]">
+      Die auf edi@energy veröffentlichten Word-Dateien werden von uns
+      vollautomatisch ausgelesen. Aus den so gewonnenen Rohdaten erstellt unsere
+      Software anschließend ebenso automatisiert Diagramme, welche inhaltlich zu
+      100% den offiziellen BDEW-Dokumenten entsprechen. Die Diagramme helfen
+      Fachbereichen und Menschen mit Prozess-Expertise dabei, ihre Systeme fit
+      für neue oder angepasste Prüflogiken zu machen. Auf Grundlage echter
+      Diagramme lässt sich viel leichter überblicken, an welcher Stelle
+      Implementierungsaufwände anfallen, ohne dabei den Gesamtprozess aus den
+      Augen zu verlieren.
+    </p>
+    <p class="text-base text-justify pt-[20px]">
+      Die Diagramme können entweder als SVG-Dateien heruntergeladen werden, oder
+      auch als puml, um entsprechend eigene Erweiterungen, Notizen usw. darin
+      abzubilden.
+    </p>
   </div>
 
   <div class="w-2/5 flex flex-col">
