@@ -34,6 +34,7 @@ export default [
         clearTimeout: "readonly",
         Blob: "readonly",
         URL: "readonly",
+        URLSearchParams: "readonly",
         HTMLDivElement: "readonly",
         CustomEvent: "readonly",
         // DOM types
@@ -55,7 +56,7 @@ export default [
       "import/first": "error",
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
-      "svelte/no-at-html-tags": "warn",
+      "svelte/no-at-html-tags": "off",
       "no-undef": "error",
       "@typescript-eslint/no-unused-expressions": [
         "error",

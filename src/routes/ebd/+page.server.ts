@@ -1,9 +1,7 @@
 import { getEbdMetadata, getEbdNames, getRoles } from "$server/ebd-loader";
 import { getFormatVersions } from "$server/format-version-loader";
 
-import type { PageServerLoad } from "./$types";
-
-export const load: PageServerLoad = async () => {
+export const load = async () => {
   const ebds = getEbdNames();
   const formatVersions = getFormatVersions();
   const metadata = getEbdMetadata();
@@ -14,5 +12,11 @@ export const load: PageServerLoad = async () => {
     formatVersions,
     metadata,
     roles,
+    initialState: {
+      formatVersion: "",
+      ebd: "",
+      roles: [],
+      ebdList: [],
+    },
   };
 };

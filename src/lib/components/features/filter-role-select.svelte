@@ -1,20 +1,39 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   export let isDisabled: boolean = false; // controls whether the role filter is disabled (depending on state of <FormatVersionSelect />)
   export let formatVersion: string = ""; // currently selected format version that determines available roles
   export let roles: Record<string, string[]> = {}; // maps format versions to their available roles for EBD filtering
+  export let initialRoles: string[] = []; // initialize the roles in both the page and the component
   export let onSelect: (selectedRoles: string[]) => void;
 
-  let selectedRoles: Set<string> = new Set();
+  let selectedRoles: Set<string> = new Set(initialRoles);
   let selectElement: HTMLSelectElement;
   let isSelectFocused = false;
+  let isInitialized = false;
 
   $: availableRoles = formatVersion ? roles[formatVersion] || [] : [];
 
-  // reset role filter select upon changing format version
-  $: if (formatVersion) {
-    selectedRoles = new Set();
-    onSelect([]);
+  // initialize selectedRoles when initialRoles changes
+  $: if (!isInitialized && initialRoles.length > 0) {
+    selectedRoles = new Set(initialRoles);
+    isInitialized = true;
   }
+
+  // reset role filter select upon changing format version
+  $: if (formatVersion && isInitialized) {
+    if (!selectedRoles.size) {
+      selectedRoles = new Set(initialRoles);
+    }
+  }
+
+  onMount(() => {
+    if (initialRoles.length > 0) {
+      selectedRoles = new Set(initialRoles);
+      onSelect([...selectedRoles]);
+    }
+    isInitialized = true;
+  });
 
   function handleSelect(event: Event) {
     const select = event.target as HTMLSelectElement;

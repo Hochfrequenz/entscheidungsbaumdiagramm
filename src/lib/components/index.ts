@@ -15,7 +15,6 @@ export { default as LandingpageBanner } from "$lib/components/shared/landingpage
 export { default as LandingpageButton } from "$lib/components/shared/landingpage-button.svelte";
 
 // features
-export { default as EbdFormHeader } from "$lib/components/features/ebd-form-header.svelte";
 export { default as EbdInput } from "$lib/components/features/ebd-input.svelte";
 export { default as EbdNavigation } from "$lib/components/features/ebd-navigation.svelte";
 export { default as ExportButton } from "$lib/components/features/export-button.svelte";

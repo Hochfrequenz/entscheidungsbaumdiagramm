@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import { base } from "$app/paths";
   import type { EbdNameExtended } from "$lib/types/metadata";
 
   import IconArrow from "../shared/icon-arrow.svelte";
@@ -8,6 +6,8 @@
   export let currentEbds: EbdNameExtended[] = [];
   export let currentFormatVersion: string = "";
   export let selectedEbdCode: string = "";
+  export let onSelect: (ebdCode: string) => void;
+  export let isDisabled: boolean = false;
 
   $: currentIndex = currentEbds.findIndex(
     (ebd) => ebd.ebd_code === selectedEbdCode,
@@ -17,6 +17,8 @@
   $: isLastEbd = currentIndex === currentEbds.length - 1;
 
   function handleNavigation(event: MouseEvent): void {
+    if (isDisabled) return;
+
     const target = event.target as HTMLElement;
     const ebdListIndex = target.closest("svg")?.id;
 
@@ -44,8 +46,8 @@
       return;
     }
 
-    const newEbd = currentEbds[newIndex].ebd_code;
-    goto(`${base}/ebd/${currentFormatVersion}/${newEbd}`);
+    const newEbd = currentEbds[newIndex];
+    onSelect(newEbd.ebd_code);
   }
 </script>
 
@@ -53,14 +55,16 @@
   <button
     on:click={handleNavigation}
     class="cursor-pointer"
-    class:opacity-35={isLastEbd}
+    class:opacity-35={isLastEbd || isDisabled}
+    disabled={isDisabled}
   >
     <IconArrow id="nextEbd" />
   </button>
   <button
     on:click={handleNavigation}
     class="cursor-pointer"
-    class:opacity-35={isFirstEbd}
+    class:opacity-35={isFirstEbd || isDisabled}
+    disabled={isDisabled}
   >
     <IconArrow orientation="rotate-180" id="previousEbd" />
   </button>
