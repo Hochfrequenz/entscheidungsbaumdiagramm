@@ -85,12 +85,6 @@
       inputValue = selectedInfo?.ebd_name ?? selectedEbdCode;
     }, 200);
   }
-
-  $: {
-    if (!isFocused) {
-      filteredEbds = ebds;
-    }
-  }
 </script>
 
 <div class="flex flex-col items-start mt-2 w-full relative">
@@ -103,7 +97,7 @@
     on:focus={handleFocus}
     on:blur={handleBlur}
     placeholder={isFocused ? "" : "Bitte auswählen"}
-    class="inline-block border-2 border-white rounded-lg bg-primary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed appearance-none cursor-pointer"
+    class="inline-block border-2 border-white rounded-lg bg-primary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
   />
 
   <label

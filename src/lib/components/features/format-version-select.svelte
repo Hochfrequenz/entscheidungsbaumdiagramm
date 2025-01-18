@@ -18,7 +18,7 @@
     id="format-version-select"
     bind:value={selectedVersion}
     on:change={handleSelect}
-    class="inline-block border-2 border-white rounded-lg bg-primary py-3 px-2 ps-3 pe-4 focus:outline-0 w-full cursor-pointer text-base leading-relaxed appearance-none"
+    class="inline-block border-2 border-white rounded-lg bg-primary py-3 px-2 ps-3 pe-4 focus:outline-0 w-full cursor-pointer text-base leading-relaxed"
   >
     <option value="">Bitte auswählen</option>
     {#each formatVersions as version}

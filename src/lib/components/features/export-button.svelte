@@ -52,7 +52,7 @@
 
 <button
   on:click={handleExport}
-  class="flex flex-row items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary transition-opacity duration-200"
+  class="flex flex-row items-center gap-2 rounded-full bg-tint text-[16px] py-4 px-5 text-secondary transition-opacity duration-200 whitespace-nowrap"
   class:opacity-30={isDisabled}
   disabled={isDisabled}
 >

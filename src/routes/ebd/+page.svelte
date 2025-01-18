@@ -139,34 +139,57 @@
     updateURL();
   }
 
+  function handleSectionSelect(ebdCode: string) {
+    const formatVersionMetadata = data.metadata[selectedFormatVersion] || {};
+    const section = formatVersionMetadata[ebdCode]?.metadata.section;
+    if (section) {
+      const sectionHeading = section.match(/AD:\s*(.*)/)![1];
+      ebdList = filterEbds(
+        selectedFormatVersion,
+        selectedRoles,
+        selectedChapters,
+        sectionHeading,
+      );
+    }
+    updateURL();
+  }
+
   function filterEbds(
     formatVersion: string,
     roles: string[],
     chapters: string[],
+    section?: string,
   ): EbdNameExtended[] {
-    if (!roles.length && !chapters.length)
-      return data.ebds[formatVersion] || [];
-
-    const filteredEbds: EbdNameExtended[] = [];
     const formatVersionMetadata = data.metadata[formatVersion] || {};
+    const allEbds = data.ebds[formatVersion] || [];
 
-    data.ebds[formatVersion]?.forEach((ebd) => {
+    if (!roles.length && !chapters.length && !section) return allEbds;
+
+    return allEbds.filter((ebd) => {
       const ebdMetadata = formatVersionMetadata[ebd.ebd_code];
+      if (!ebdMetadata) return false;
+
       const matchesRole =
         !roles.length ||
-        (ebdMetadata?.metadata.role &&
+        (ebdMetadata.metadata.role &&
           roles.includes(ebdMetadata.metadata.role));
       const matchesChapter =
         !chapters.length ||
-        (ebdMetadata?.metadata.chapter &&
+        (ebdMetadata.metadata.chapter &&
           chapters.includes(ebdMetadata.metadata.chapter));
+      const matchesSection =
+        !section ||
+        (ebdMetadata.metadata.section &&
+          extractSectionHeading(ebdMetadata.metadata.section) === section);
 
-      if (matchesRole && matchesChapter) {
-        filteredEbds.push(ebd);
-      }
+      return matchesRole && matchesChapter && matchesSection;
     });
+  }
 
-    return filteredEbds;
+  // remove "<section_number> AD: " pattern
+  function extractSectionHeading(section: string): string {
+    const match = section.match(/AD:\s*(.*)/);
+    return match ? match[1] : section;
   }
 </script>
 
@@ -184,6 +207,8 @@
     chapters={data.chapters}
     {selectedChapters}
     onChapterSelect={handleChapterSelect}
+    metadata={data.metadata}
+    onSectionSelect={handleSectionSelect}
   >
     <svelte:fragment slot="actions">
       <ExportButton

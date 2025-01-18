@@ -20,5 +20,6 @@ export { default as EbdNavigation } from "$lib/components/features/ebd-navigatio
 export { default as ExportButton } from "$lib/components/features/export-button.svelte";
 export { default as FilterChapterSelect } from "$lib/components/features/filter-chapter-select.svelte";
 export { default as FilterRoleSelect } from "$lib/components/features/filter-role-select.svelte";
+export { default as FilterSectionInput } from "$lib/components/features/filter-section-input.svelte";
 export { default as FormatVersionSelect } from "$lib/components/features/format-version-select.svelte";
 export { default as SvgContainer } from "$lib/components/features/svg-container.svelte";
